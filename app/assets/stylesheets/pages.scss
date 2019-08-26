@@ -1,0 +1,35 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#container {
+  margin: 48px auto;
+  width: 960px;
+}
+
+#container > section {
+  clear: both;
+}
+
+#container > header {
+  margin-bottom: 46px;
+}
+
+#container > header > h1 {
+  float: left;
+  margin: 0;
+}
+
+.navigation-links {
+  float: right;
+}
+
+.navigation-links li {
+  display: inline-block;
+  margin: 0 16px;
+}
+
+/* MISC */
+
+.clearfix:after {content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;} html[xmlns].clearfix{display:block;} * html .clearfix{height:1%;}
+
