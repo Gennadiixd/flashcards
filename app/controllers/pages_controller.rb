@@ -1,11 +1,9 @@
+# frozen_string_literal: true
+
 class PagesController < ApplicationController
-    def index
+  def index; end
 
-    end
-    def all_cards
+  def all_cards; end
 
-    end
-    def add_card
-
-    end
+  def add_card; end
 end
