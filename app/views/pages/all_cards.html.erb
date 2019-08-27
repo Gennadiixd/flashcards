@@ -1,1 +1,7 @@
 ALL CARDS
+
+<ul>
+    <% @cards.each do |t| %>
+        <li><%= t.original_text %> <%= t.review_date.strftime('%d-%m-%Y') %></li>
+    <% end %>
+</ul>
