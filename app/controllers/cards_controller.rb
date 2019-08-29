@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CardsController < ApplicationController
-
   def index
     @cards = Card.all
   end
@@ -49,5 +48,4 @@ class CardsController < ApplicationController
   def whitelisted_cards_params
     params.require(:card).permit(:original_text, :translated_text)
   end
-
 end
