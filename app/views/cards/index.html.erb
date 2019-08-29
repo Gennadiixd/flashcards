@@ -1,0 +1,12 @@
+<div class="alert alert-warning">
+  <h1>ALL CARDS</h1>
+</div>
+
+<section class="jumbotron">
+    <ul class="list-group">
+        <% @cards.each do |card| %>
+            <li class="list-group-item list-group-item-secondary"> <%= card.original_text %> <%= card.review_date.strftime('%d-%m-%Y %H:%M') %></li>
+            <p><%= link_to 'show', card_path(card) %> <%= link_to 'edit', edit_card_path(card) %> <%= link_to 'delete', card_path(card), method: :delete, data: {confirm: "Sure?"} %></p>
+        <% end %>
+    </ul>
+</section>
