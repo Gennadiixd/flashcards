@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CardsController < ApplicationController
+  before_action :load_card, only: %i[show edit update destroy]
+
   def index
     @cards = Card.all
   end
@@ -10,18 +12,13 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    @card = Card.find(params[:id])
     @card.destroy
     redirect_to cards_path
   end
 
-  def edit
-    @card = Card.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @card = Card.find(params[:id])
-
     if @card.update(whitelisted_cards_params)
       redirect_to @card
     else
@@ -29,9 +26,7 @@ class CardsController < ApplicationController
     end
   end
 
-  def show
-    @card = Card.find(params[:id])
-  end
+  def show; end
 
   def create
     @card = Card.new(whitelisted_cards_params)
@@ -48,6 +43,10 @@ class CardsController < ApplicationController
   end
 
   private
+
+  def load_card
+    @card = Card.find(params[:id])
+  end
 
   def whitelisted_cards_params
     params.require(:card).permit(:original_text, :translated_text)
