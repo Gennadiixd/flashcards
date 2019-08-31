@@ -36,6 +36,10 @@ class CardsController < ApplicationController
   def create
     @card = Card.new(whitelisted_cards_params)
 
+    unless @card.review_date
+      @card.review_date = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
+    end
+
     if @card.save
       redirect_to @card
     else

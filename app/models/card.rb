@@ -5,13 +5,9 @@ class Card < ApplicationRecord
 
   validate :original_and_translated_text
 
-  before_validation do
-    unless review_date
-      self.review_date = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
-    end
-  end
-
   def original_and_translated_text
-    errors.add(:card, "original and translated text can't be the same") if original_text.casecmp == translated_text.casecmp
+    return unless original_text.casecmp?(translated_text)
+
+    errors.add(:card, 'original and translated texts are equal')
   end
 end
