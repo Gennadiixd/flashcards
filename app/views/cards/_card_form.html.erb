@@ -1,0 +1,25 @@
+<div class="alert alert-warning">
+  <h1><%= locals[:form_name] %></h1>
+</div>
+
+<%= form_for :card, url: locals[:url], method: locals[:method] do |f| %>
+
+    <% if locals[:card].errors.any? %>
+        <% locals[:card].errors.full_messages.each do |msg| %>
+            <div class="alert alert-danger"><%= msg %></div>
+        <% end %>
+    <% end %>
+
+    <p>
+        Оригинальный текст<br>
+            <%= f.text_area :original_text %>
+    </p>
+    <p>        
+        Переведёный текст<br>
+            <%= f.text_area :translated_text %>
+    </p>
+        
+    <p>
+         <%= f.submit %>
+    </p>
+<% end %>

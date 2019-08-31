@@ -6,7 +6,9 @@ class Card < ApplicationRecord
   validate :original_and_translated_text
 
   before_validation do
-    self.review_date = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
+    unless review_date
+      self.review_date = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
+    end
   end
 
   def original_and_translated_text

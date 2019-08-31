@@ -1,27 +1,3 @@
-<div class="alert alert-warning">
-  <h1>EDIT CARD</h1>
-</div>
-
 <div class="jumbotron">
-    <%= form_for :card, url: card_path(@card), method: :patch do |f| %>
-
-        <% if @card.errors.any? %>
-            <% @card.errors.full_messages.each do |msg| %>
-                <div class="alert alert-danger"><%= msg %></div>
-            <% end %>
-        <% end %>
-
-        <p>
-            Оригинальный текст<br>
-                <%= f.text_area :original_text %>
-        </p>
-        <p>        
-            Переведёный текст<br>
-                <%= f.text_area :translated_text %>
-        </p>
-        
-        <p>
-            <%= f.submit %>
-        </p>
-    <% end %>
+    <%= render "card_form", locals: { card: @card, method: :patch, url: card_path(@card), form_name: "EDIT CARD"} %>    
 </div>
