@@ -28,10 +28,10 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/cards">Все карточки</a>
+          <p class="nav-link"><%= link_to 'Все карточки', cards_path %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cards/new">Добавить карточку</a>
+          <p class="nav-link"><%= link_to 'Добавить карточку', new_card_path %>
         </li>
       </ul>
       <span class="navbar-text">
