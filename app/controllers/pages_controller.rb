@@ -7,23 +7,26 @@ class PagesController < ApplicationController
 
   def check_card
     @card = params[:card]
-    is_user_right = session[:translated_text] == @card[:user_translated_text]
+    @card_session = session[:card]
+    is_user_right = session[:card]['translated_text'] == @card[:user_translated_text]
     if is_user_right
-      @card.review_date = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
-      @card.save
+      session[:card]['review_date'] = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
+      puts '<=========================================='
+      puts @card_session['review_date']
+      @card_session.save
+      msg = 'You are right!'
     else
-      @card.errors.add(:translated_text, 'Not valid')
+      msg = 'Try again later'
     end
-    find_random_card
-    redirect_to root_path
+    redirect_to root_path, flash: { error: msg }
   end
 
   def edit; end
 
   def find_random_card
-    @cars_ids = Card.where('review_date > ?', DateTime.now).pluck('id')
+    @cars_ids = Card.where('review_date < ?', DateTime.now).pluck('id')
     random_card_id = rand(0..(@cars_ids.length - 1))
     @card = Card.find(@cars_ids[random_card_id])
-    session[:translated_text] = @card.translated_text
+    session[:card] = @card
   end
 end
