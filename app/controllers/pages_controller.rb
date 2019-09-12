@@ -7,13 +7,10 @@ class PagesController < ApplicationController
 
   def check_card
     @card = params[:card]
-    @card_session = session[:card]
     is_user_right = session[:card]['translated_text'] == @card[:user_translated_text]
     if is_user_right
       session[:card]['review_date'] = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
-      puts '<=========================================='
-      puts @card_session['review_date']
-      @card_session.save
+      Card.find(session[:card]['id']).update_attributes(session[:card])
       msg = 'You are right!'
     else
       msg = 'Try again later'
