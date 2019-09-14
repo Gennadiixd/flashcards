@@ -54,7 +54,7 @@ class CardsController < ApplicationController
       msg = 'Try again later'
     end
     redirect_to root_path, flash: { error: msg }
-end
+  end
 
   private
 
