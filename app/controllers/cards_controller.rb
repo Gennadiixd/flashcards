@@ -42,6 +42,20 @@ class CardsController < ApplicationController
     end
   end
 
+  def check_card
+    @card_from_params = params[:card]
+    @card_from_db = Card.find(session[:card]['id'])
+    is_user_right = @card_from_db[:translated_text] == @card_from_params[:user_translated_text]
+    if is_user_right
+      @card_from_db[:review_date] = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
+      @card_from_db.save
+      msg = 'You are right!'
+    else
+      msg = 'Try again later'
+    end
+    redirect_to root_path, flash: { error: msg }
+end
+
   private
 
   def load_card
