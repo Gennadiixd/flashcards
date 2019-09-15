@@ -8,10 +8,10 @@
 
   <section class="jumbotron">
 
-   <%= form_for :card, url: check_card_path, method: "post" do |f| %>
+   <%= form_for :card, url: card_check_card_path(@card.id), method: "post" do |f| %>
        
         <% flash.each do |key, value| %>
-          <div class="alert alert-danger"><%= value %></div>
+          <div class="<%= key == 'error' ? "alert alert-danger" : 'alert alert-success' %>"  ><%= value %></div>
         <% end %>
 
         <div class='text'>
