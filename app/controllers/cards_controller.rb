@@ -42,6 +42,20 @@ class CardsController < ApplicationController
     end
   end
 
+  def check_card
+    @card_from_params = params[:card]
+    @translated_text = Card.where(id: params[:card_id]).pluck(:translated_text).first
+    is_user_right = @translated_text == @card_from_params[:user_translated_text]
+    if is_user_right
+      plus_three_days = (Time.now + 259_200).strftime('%Y-%m-%d %H:%M:%S')
+      Card.update(params[:card_id], review_date: plus_three_days)
+      flash_msg = { success: 'You are right!' }
+    else
+      flash_msg = { error: 'Try again later' }
+    end
+    redirect_to root_path, flash: flash_msg
+  end
+
   private
 
   def load_card

@@ -5,4 +5,29 @@
       Первый в мире удобный менеджер флеш-карточек. Именно так.
     </p>
   </section>
+
+  <section class="jumbotron">
+
+   <%= form_for :card, url: card_check_card_path(@card.id), method: "post" do |f| %>
+       
+        <% flash.each do |key, value| %>
+          <div class="<%= key == 'error' ? "alert alert-danger" : 'alert alert-success' %>"  ><%= value %></div>
+        <% end %>
+
+        <div class='text'>
+          <h4>Original</h4>
+          <h5><%= @card.original_text %></h5>
+        </div>
+        <div class='text'>        
+          <h4>Your translation</h4>
+          <h5><%= f.text_area :user_translated_text, value: "" %></h5>
+        </div>
+            
+        <div>
+          <%= f.submit("Check Card") %>
+        </div>
+    <% end %>
+
+  </section>
+
 </section>
